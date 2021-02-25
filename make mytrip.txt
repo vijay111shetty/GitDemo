@@ -1,0 +1,18 @@
+import time
+from selenium import webdriver
+driver=webdriver.Chrome(executable_path='C:\\chromedriver.exe')
+driver.get('https://makemytrip.com/')
+driver.find_element_by_id("fromCity").click()
+driver.find_element_by_css_selector('input[placeholder="From"]').send_keys('del')
+time.sleep(2)
+cities=driver.find_element_by_css_selector("p[class*='blackText']")
+
+print(len(cities))
+for country in cities:
+    if country.text=="Del Rio, United States":
+        country.click()
+        break
+#print(driver.find_element_by_id("autosuggest").text)
+#the above expression will not get india beacause it will updated after words
+print(driver.find_element_by_id("fromCity").get_attribute("value"))
+#from this method we will get india is printed in box
